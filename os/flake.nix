@@ -15,12 +15,12 @@
         {
             system = "x86_64-linux";
             modules = [
-              ../configuration.nix
+              ./configuration.nix
               home-manager.nixosModules.home-manager
               {
                 home-manager.useGlobalPkgs = true;
                 home-manager.useUserPackages = true;
-                home-manager.users.piero = ./home/home.nix;
+                home-manager.users.piero = ./conf/home/home.nix;
               }
             ];
         };
