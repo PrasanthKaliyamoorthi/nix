@@ -8,6 +8,7 @@
       bind =
         [
           "$mod, Enter, exec, kitty"
+          "$mod, Q, exec, kitty"
           ", Print, exec, grimblast copy area"
         ]
         ++ (
@@ -23,4 +24,8 @@
             9)
         );
     };
+  wayland.windowManager.hyprland.plugins = [
+    inputs.hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}.hyprbars
+    "/absolute/path/to/plugin.so"
+  ];
 }
