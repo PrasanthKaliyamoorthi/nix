@@ -3,6 +3,8 @@
 {
   imports = [
     ./sys/system.nix
+    ./home/home.nix
+    ./home/manager.nix
   ];
 
   nix = {
