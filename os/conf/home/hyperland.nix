@@ -1,7 +1,8 @@
-{ pkgs, user, ... }: {
+{ user, config, pkgs, lib,... }:
+
+{
   wayland.windowManager.hyprland.enable = true;
 
-  {
     wayland.windowManager.hyprland.settings = {
       "$mod" = "SUPER";
       bind =
@@ -22,5 +23,4 @@
             9)
         );
     };
-  }
 }
