@@ -1,13 +1,21 @@
 { pkgs, config, ... }: {
-  services.xserver = {
+  # Enable Hyprland
+  programs.hyprland = {
     enable = true;
-    displayManager.sddm = {
-      enable = true;
-      wayland.enable = true;
-    };
-    desktopManager.plasma6.enable = true;
-    layout = "us";
-    xkbVariant = "";
-    excludePackages = with pkgs; [ xterm ];
+    xwayland.enable = true;
   };
+
+  services.displayManager.sddm = {
+    enable = true;
+    wayland.enable = true;
+  };
+
+  # Configure keymap
+  services.xserver.xkb = {
+    layout = "us";
+    variant = "";
+  };
+
+  # Exclude default X11 packages
+  services.xserver.excludePackages = with pkgs; [ xterm ];
 }
