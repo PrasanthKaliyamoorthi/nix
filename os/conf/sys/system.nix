@@ -7,6 +7,10 @@
       ./services.nix
     ];
 
+  # boot loader
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+
   # hostname
   networking.hostName = "nixos";
 
