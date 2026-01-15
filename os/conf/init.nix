@@ -2,6 +2,6 @@
 
 {
   imports = [
-  ./sys/system.nix
+    ./sys/system.nix
   ];
-  }
+}
