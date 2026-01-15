@@ -139,7 +139,7 @@
         italic = auto;
         bold_italic = auto;
       }
-      opacity = 9.0;
+      background.opacity = 9.0;
     }
   }
 
