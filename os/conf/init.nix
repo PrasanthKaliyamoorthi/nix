@@ -1,9 +1,7 @@
 { lib, pkgs, ... }:
 
-
 {
-  imports [
-  ./flake/flake.nix
+  imports = [
   ./sys/system.nix
   ];
   }

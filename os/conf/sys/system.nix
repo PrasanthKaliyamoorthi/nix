@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... };
+{ config, lib, pkgs, ... }:
 
 {
   imports = 
@@ -14,7 +14,7 @@
   networking.networkmanager.enable = true;
   
   # time zone
-  time.timeZone = "Aisa/Kolkata";
+  time.timeZone = "Asia/Kolkata";
   
   # user account.
   users.users.nix = {
