@@ -3,7 +3,7 @@
 
 {
   imports [
-  ./flake.nix
-  ./system.nix
+  ./flake/flake.nix
+  ./sys/system.nix
   ];
   }

@@ -4,6 +4,7 @@
   imports = 
     [
       ./sysPkgs.nix
+      ./services.nix
     ];
 
   # hostname
