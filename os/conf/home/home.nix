@@ -1,9 +1,9 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib,... }:
 
 {
   # TODO please change the username & home directory to your own
   home.username = "piero";
-  home.homeDirectory = "/home/piero/";
+  home.homeDirectory = "/home/piero";
 
   # Import the scripts directory into the Nix store,
   # and recursively generate symbolic links in the Home directory pointing to the files in the store.
@@ -33,7 +33,6 @@
     yazi
 
     # archives
-    tar
     zip
     xz
     unzip
@@ -75,7 +74,6 @@
 
     # productivity
     glow # markdown previewer in terminal
-    thefuck
 
     btop  # replacement of htop/nmon
     iotop # io monitoring
@@ -128,16 +126,11 @@
     };
   };
 
-  programs.kitty = {
+  programs.kitty = lib.mkForce {
     enable = true;
 
     settings = {
       background_opacity = "0.9";
-      env.TERM = "xterm-256color";
-      font = {
-        family = "CaskaydiaCove Nerd Font Mono";
-        size = 14.0;
-      };
       background_blur = 5;
       symbol_map = let
         mappings = [
@@ -168,34 +161,16 @@
   programs.zsh = {
     enable = true;
     enableCompletion = true;
-    zplug = {
-      enable = true;
-      plugins = [
-        {name = "zsh-users/zsh-autosuggestions";} # Simple plugin installation
-        {
-          name = "romkatv/powerlevel10k";
-          tags = [ "as:theme" "depth:1" ];
-        } # Installations with additional options. For the list of options, please refer to Zplug README.
-      ];
-    };
   
   # With Oh-My-Zsh:
     oh-my-zsh = {
       enable = true;
       plugins = [
         "git"         # also requires `programs.git.enable = true;`
-        "thefuck"     # also requires `programs.thefuck.enable = true;` 
       ];
       theme = "robbyrussell";
     };
   
-  # With Antidote:
-    antidote = {
-      enable = true;
-      plugins = [''
-        zsh-users/zsh-autosuggestions
-        ohmyzsh/ohmyzsh path:lib/git.zsh
-      '']; # explanation of "path:..." and other options explained in Antidote README.
   
   # Manual
     plugins = [
@@ -207,16 +182,6 @@
           rev = "23.07.13";
           sha256 = "sha256-/6V6IHwB5p0GT1u5SAiUa20LjFDSrMo731jFBq/bnpw=";
         };
-      }
-      {
-        name = "powerlevel10k";
-        src = pkgs.zsh-powerlevel10k;
-        file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
-      }
-      {
-        name = "powerlevel10k-config";
-        src = ./p10k-config;
-        file = "p10k.zsh";
       }
       {
         name = "zsh-syntax-highlighting";
@@ -284,4 +249,5 @@
       urlencode = "python3 -c 'import sys, urllib.parse as ul; print(ul.quote_plus(sys.stdin.read()))'";
     };
   };
+  home.stateVersion = "25.11";
 }
