@@ -2,6 +2,7 @@
 
 {
   environment.systemPackages = with pkgs; [
+    rofi
     vim
     wget
     neovim

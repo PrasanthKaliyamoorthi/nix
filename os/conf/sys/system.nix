@@ -5,6 +5,7 @@
     [
       ./sysPkgs.nix
       ./services.nix
+      ./wayland.nix
     ];
 
   # boot loader

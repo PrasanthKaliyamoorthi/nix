@@ -5,6 +5,10 @@
   home.username = "piero";
   home.homeDirectory = "/home/piero";
 
+  imports = 
+    [
+      ./hyperland.nix
+    ];
   # Import the scripts directory into the Nix store,
   # and recursively generate symbolic links in the Home directory pointing to the files in the store.
   # home.file.".config/i3/scripts" = {
@@ -95,8 +99,10 @@
   # basic configuration of git, please change to your own
   programs.git = {
     enable = true;
-    userName = "piero";
-    userEmail = "<my@email.com>";
+    settings {
+      user.name = "piero";
+      user.email = "<my@email.com>";
+   }
   };
 
   # starship - an customizable prompt for any shell
