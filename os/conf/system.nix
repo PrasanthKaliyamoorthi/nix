@@ -8,6 +8,9 @@
 
   # hostname
   networking.hostName = "nixos";
+
+  # enable networking
+  networking.networkmanager.enable = true;
   
   # time zone
   time.timeZone = "Aisa/Kolkata";
