@@ -7,3 +7,4 @@ result-*
 
 # Ignore iso
 *.iso
+nixos-25.11-minimal/
