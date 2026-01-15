@@ -4,5 +4,6 @@
 {
   imports [
   ./flake.nix
+  ./system.nix
   ];
   }
