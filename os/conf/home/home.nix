@@ -75,6 +75,7 @@
 
     # productivity
     glow # markdown previewer in terminal
+    thefuck
 
     btop  # replacement of htop/nmon
     iotop # io monitoring
@@ -136,9 +137,6 @@
       font = {
         family = "CaskaydiaCove Nerd Font Mono";
         size = 14.0;
-        bold = auto;
-        italic = auto;
-        bold_italic = auto;
       };
       background_blur = 5;
       symbol_map = let
@@ -170,64 +168,120 @@
   programs.zsh = {
     enable = true;
     enableCompletion = true;
-    # TODO add your custom bashrc here
-    zshrcExtra = ''
-      export PATH="$PATH:$HOME/bin:$HOME/.local/bin:$HOME/go/bin"
-    '';
-
+    zplug = {
+      enable = true;
+      plugins = [
+        {name = "zsh-users/zsh-autosuggestions";} # Simple plugin installation
+        {
+          name = "romkatv/powerlevel10k";
+          tags = [ "as:theme" "depth:1" ];
+        } # Installations with additional options. For the list of options, please refer to Zplug README.
+      ];
+    };
+  
+  # With Oh-My-Zsh:
+    oh-my-zsh = {
+      enable = true;
+      plugins = [
+        "git"         # also requires `programs.git.enable = true;`
+        "thefuck"     # also requires `programs.thefuck.enable = true;` 
+      ];
+      theme = "robbyrussell";
+    };
+  
+  # With Antidote:
+    antidote = {
+      enable = true;
+      plugins = [''
+        zsh-users/zsh-autosuggestions
+        ohmyzsh/ohmyzsh path:lib/git.zsh
+      '']; # explanation of "path:..." and other options explained in Antidote README.
+  
+  # Manual
+    plugins = [
+      {
+        name = "zsh-autocomplete";
+        src = pkgs.fetchFromGitHub {
+          owner = "marlonrichert";
+          repo = "zsh-autocomplete";
+          rev = "23.07.13";
+          sha256 = "sha256-/6V6IHwB5p0GT1u5SAiUa20LjFDSrMo731jFBq/bnpw=";
+        };
+      }
+      {
+        name = "powerlevel10k";
+        src = pkgs.zsh-powerlevel10k;
+        file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
+      }
+      {
+        name = "powerlevel10k-config";
+        src = ./p10k-config;
+        file = "p10k.zsh";
+      }
+      {
+        name = "zsh-syntax-highlighting";
+        src = pkgs.fetchFromGitHub {
+          owner = "zsh-users";
+          repo = "zsh-syntax-highlighting";
+          rev = "0.8.0";
+          sha256 = "sha256-iJdWopZwHpSyYl5/FQXEW7gl/SrKaYDEtTH9cGP7iPo=";
+        };
+      }
+    ];
     # set some aliases, feel free to add more or remove some
-  shellAliases = {
-    "-" = "cd -";
-  
-    "..."   = "../..";
-    "...."  = "../../..";
-    "....." = "../../../..";
-    "......" = "../../../../..";
-  
-    "1" = "cd -1";
-    "2" = "cd -2";
-    "3" = "cd -3";
-    "4" = "cd -4";
-    "5" = "cd -5";
-    "6" = "cd -6";
-    "7" = "cd -7";
-    "8" = "cd -8";
-    "9" = "cd -9";
-  
-    "_" = "sudo";
-  
-    bat = "batcat";
-    cal = "cal | cowsay -n | lolcat";
-    clr = "clear";
-  
-    egrep = "grep -E";
-    fgrep = "grep -F";
-    g = "git";
-  
-    hybrid-sleep = "systemctl hybrid-sleep";
-    kvmoff = "sudo rmmod kvm_amd && sudo rmmod kvm";
-  
-    l  = "ls -lah";
-    la = "ls -lAh";
-    ll = "ls -lh";
-    ls = "ls --color=tty";
-    lsa = "ls -lah";
-  
-    md = "mkdir -p";
-    rd = "rmdir";
-  
-    poweroff = "systemctl poweroff";
-    reboot = "systemctl reboot";
-  
-    python = "python3";
-  
-    steam = "flatpak run com.valvesoftware.Steam";
-    yasu  = "flatpak run org.yuzu_emu.yuzu >/dev/null &";
-  
-    which-command = "whence";
-  
-    urldecode = "python3 -c 'import sys, urllib.parse as ul; print(ul.unquote_plus(sys.stdin.read()))'";
-    urlencode = "python3 -c 'import sys, urllib.parse as ul; print(ul.quote_plus(sys.stdin.read()))'";
+    shellAliases = {
+      "-" = "cd -";
+    
+      "..."   = "../..";
+      "...."  = "../../..";
+      "....." = "../../../..";
+      "......" = "../../../../..";
+    
+      "1" = "cd -1";
+      "2" = "cd -2";
+      "3" = "cd -3";
+      "4" = "cd -4";
+      "5" = "cd -5";
+      "6" = "cd -6";
+      "7" = "cd -7";
+      "8" = "cd -8";
+      "9" = "cd -9";
+    
+      "_" = "sudo";
+    
+      bat = "batcat";
+      cal = "cal | cowsay -n | lolcat";
+      clr = "clear";
+    
+      egrep = "grep -E";
+      fgrep = "grep -F";
+      g = "git";
+    
+      hybrid-sleep = "systemctl hybrid-sleep";
+      kvmoff = "sudo rmmod kvm_amd && sudo rmmod kvm";
+    
+      l  = "ls -lah";
+      la = "ls -lAh";
+      ll = "ls -lh";
+      ls = "ls --color=tty";
+      lsa = "ls -lah";
+    
+      md = "mkdir -p";
+      rd = "rmdir";
+    
+      poweroff = "systemctl poweroff";
+      reboot = "systemctl reboot";
+      update = "sudo nixos-rebuild switch";
+    
+      python = "python3";
+    
+      steam = "flatpak run com.valvesoftware.Steam";
+      yasu  = "flatpak run org.yuzu_emu.yuzu >/dev/null &";
+    
+      which-command = "whence";
+    
+      urldecode = "python3 -c 'import sys, urllib.parse as ul; print(ul.unquote_plus(sys.stdin.read()))'";
+      urlencode = "python3 -c 'import sys, urllib.parse as ul; print(ul.quote_plus(sys.stdin.read()))'";
+    };
   };
-
 }
