@@ -165,7 +165,7 @@
       in
         (builtins.concatStringsSep "," mappings) + " Symbols Nerd Font";
     };
-  }
+  };
 
   programs.zsh = {
     enable = true;
@@ -176,48 +176,58 @@
     '';
 
     # set some aliases, feel free to add more or remove some
-    shellAliases = {
-      -="cd -"
-      ...=../..
-      ....=../../..
-      .....=../../../..
-      ......=../../../../..
-      1="cd -1"
-      2="cd -2"
-      3="cd -3"
-      4="cd -4"
-      5="cd -5"
-      6="cd -6"
-      7="cd -7"
-      8="cd -8"
-      9="cd -9"
-      _="sudo "
-      bat=batcat
-      cal="cal | cowsay -n | lolcat"
-      clr=clear
-      current_branch=$"\n    print -Pu2 "%F{yellow}[oh-my-zsh] \"%F{red}current_branch%F{yellow}\" is deprecated, using \"%F{green}git_current_branch%F{yellow}\" instead.%f"\n    git_current_branch"
-      egrep="grep -E"
-      fgrep="grep -F"
-      g=git
-      hybrid-sleep="systemctl hybrid-sleep"
-      kvmoff="sudo rmmod kvm_amd && sudo rmmod kvm"
-      l="ls -lah"
-      la="ls -lAh"
-      ll="ls -lh"
-      ls="ls --color=tty"
-      lsa="ls -lah"
-      md="mkdir -p"
-      poweroff="systemctl poweroff"
-      python=python3
-      rd=rmdir
-      reboot="systemctl reboot"
-      steam="   flatpak run com.valvesoftware.Steam "
-      which-command=whence
-      yasu="   flatpak run org.yuzu_emu.yuzu >/dev/null &"
-
-      urldecode = "python3 -c 'import sys, urllib.parse as ul; print(ul.unquote_plus(sys.stdin.read()))'";
-      urlencode = "python3 -c 'import sys, urllib.parse as ul; print(ul.quote_plus(sys.stdin.read()))'";
-    };
+  shellAliases = {
+    "-" = "cd -";
+  
+    "..."   = "../..";
+    "...."  = "../../..";
+    "....." = "../../../..";
+    "......" = "../../../../..";
+  
+    "1" = "cd -1";
+    "2" = "cd -2";
+    "3" = "cd -3";
+    "4" = "cd -4";
+    "5" = "cd -5";
+    "6" = "cd -6";
+    "7" = "cd -7";
+    "8" = "cd -8";
+    "9" = "cd -9";
+  
+    "_" = "sudo";
+  
+    bat = "batcat";
+    cal = "cal | cowsay -n | lolcat";
+    clr = "clear";
+  
+    egrep = "grep -E";
+    fgrep = "grep -F";
+    g = "git";
+  
+    hybrid-sleep = "systemctl hybrid-sleep";
+    kvmoff = "sudo rmmod kvm_amd && sudo rmmod kvm";
+  
+    l  = "ls -lah";
+    la = "ls -lAh";
+    ll = "ls -lh";
+    ls = "ls --color=tty";
+    lsa = "ls -lah";
+  
+    md = "mkdir -p";
+    rd = "rmdir";
+  
+    poweroff = "systemctl poweroff";
+    reboot = "systemctl reboot";
+  
+    python = "python3";
+  
+    steam = "flatpak run com.valvesoftware.Steam";
+    yasu  = "flatpak run org.yuzu_emu.yuzu >/dev/null &";
+  
+    which-command = "whence";
+  
+    urldecode = "python3 -c 'import sys, urllib.parse as ul; print(ul.unquote_plus(sys.stdin.read()))'";
+    urlencode = "python3 -c 'import sys, urllib.parse as ul; print(ul.quote_plus(sys.stdin.read()))'";
   };
 
 }
