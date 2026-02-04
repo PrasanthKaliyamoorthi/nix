@@ -13,11 +13,13 @@ let
   '';
 
   crossCompileFor = hostPkgs:
-    pkgs.runCommandCC "test-cross-test" {} ''
+    pkgs.runCommandCC "test-cross-test2" {} ''
       HOME=$PWD
       $CC ${test} -o test
-      ${hostPkgs.stdenv.hostPlatform.emulator hostPkgs.buildPackages} test >$out
-      cat $out
+      mkdir $out
+      ${hostPkgs.stdenv.hostPlatform.emulator hostPkgs.buildPackages} test >$out/txt
+      cat $out/txt
+      cp test $out
     '';
 in {
   win = crossCompileFor pkgs.pkgsCross.mingwW64;
